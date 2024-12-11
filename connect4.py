@@ -1,7 +1,8 @@
 import numpy as np
 import pygame # int 
 import sys
-
+import math
+from threading import Timer
 """
  [[0,0,0,0,0,0,0],
   [0,0,0,0,0,0,0],
@@ -12,6 +13,11 @@ import sys
  
  
 """
+
+bord_color = (0,0,0)
+empty_circle = (253,245,230)
+player_1_color = (50,205,50)
+player_2_color = (0,0,128)
 
 player_1 = 1
 player_2 = 2
@@ -38,8 +44,7 @@ def get_open_valid_pos(board,selec):
         if board[row][selec] == 0:
             return row
 
-def print_board(board):
-    print(np.flip(board, 0))
+
 
 def check_win(row, col):
         row_moves = [0, 1, 1, 1]
@@ -61,9 +66,28 @@ def check_win(row, col):
                 return True
         return False
 
-board = create_board()
+def draw_board(board):
+    for c in range(7):
+        for r in range(6):
+            pygame.draw.rect(screen, bord_color, (c * size, r * size + size, size, size ))
+            if board[r][c] == 0:
+                pygame.draw.circle(screen, empty_circle, (int(c * size + size/2), int(r* size + size + size/2)), circle_radius)
+            elif board[r][c] == 1:
+                pygame.draw.circle(screen, player_2_color, (int(c * size + size/2), int(r* size + size + size/2)), circle_radius)
+            else :
+                pygame.draw.circle(screen, player_1_color, (int(c * size + size/2), int(r* size + size + size/2)), circle_radius)
 
+    pygame.display.update()
+
+board = create_board()
 game_over = False
+
+not_over = True
+
+def end_game():
+    global game_over
+    game_over = True
+    print(game_over)
 
 turn = 0
 
@@ -75,38 +99,74 @@ size  = 100
 width = 100 * 7
 height = 100 * (6 + 1)
 
+circle_radius = int(size/2 - 5)
+
 screen = pygame.display.set_mode((width , height))
+draw_board(board)
+pygame.display.update()
+
+my_font = pygame.font.SysFont("monospace", 75)
+
 
 while not game_over:
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             sys.exit()
-    
-    if turn == 0 :
-        selec = int(input("player 1 : enter your drop piece 0 - 6 : "))
 
-        if is_loc_valid(board,selec):
-             row = get_open_valid_pos(board,selec)
-             drop_piece(board,selec,row, player_1 )
-             
-             if check_win(row, selec):
-                 print("player 1 winsssssss")
-                 game_over = True
-        print_board(board)
-    else:
-        selec = int(input("player 2 : enter your drop piece 0 - 6 : "))
+        if event.type == pygame.MOUSEMOTION and not_over:
+            pygame.draw.rect(screen, bord_color, (0, 0, width, size))
+            xpos = pygame.mouse.get_pos()[0]
+            if turn == 0:
+                pygame.draw.circle(screen, player_2_color, (xpos, int(size/2)), circle_radius )
+            else: 
+                pygame.draw.circle(screen, player_1_color, (xpos, int(size/2)), circle_radius )
 
-        if is_loc_valid(board,selec):
-             row = get_open_valid_pos(board,selec)
-             drop_piece(board,selec,row, player_2 )
+        pygame.display.update()
+
+        if event.type == pygame.MOUSEBUTTONDOWN and not_over:
+
+            pygame.draw.rect(screen, bord_color, (0, 0, width, size))
+            if turn == 0 :
+                # we assume players will use correct input
+                xpos = event.pos[0] 
+                selec = int(math.floor(xpos/size)) #int(input("Player 1 make your selection by typing (0-6):"))
+
+                if is_loc_valid(board,selec):
+                    row = get_open_valid_pos(board,selec)
+                    drop_piece(board,selec,row, player_1 )
              
-             if check_win(row, selec):
-                 print("player 2 winsssssss")
-                 game_over = True
-        print_board(board)
-    
-    turn += 1
-    turn = turn % 2
+                    if check_win(row, selec):
+                        print("PLAYER 1 WINS!")
+                        label = my_font.render("PLAYER 1 WINS!", 1, (139,0,0))
+                        screen.blit(label, (40, 10))
+                        not_over = False
+                        t = Timer(3.0, end_game)
+                        t.start()
+        
+            else:
+                # we assume players will use correct input
+                xpos = event.pos[0] 
+                selec = int(math.floor(xpos/size)) #int(input("Player 1 make your selection by typing (0-6):"))
+
+                if is_loc_valid(board,selec):
+                    row = get_open_valid_pos(board,selec)
+                    drop_piece(board,selec,row, player_2 )
+             
+                    if check_win(row, selec):
+                        print("PLAYER 2 WINS!")
+                        label = my_font.render("PLAYER 2 WINS!", 1, (139,0,0))
+                        screen.blit(label, (40, 10))
+                        not_over = False
+                        t = Timer(3.0, end_game)
+                        t.start()
+
+            draw_board(board)
+
+            # increment turn by 1
+            turn += 1
+            # this will alternate between 0 and 1 withe very turn
+            turn = turn % 2
+
 
 
