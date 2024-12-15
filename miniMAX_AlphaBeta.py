@@ -70,7 +70,7 @@ def main():
                         draw_board(board)
 
         if turn == AI and not game_over:
-            col, minimax_score = minimax(board, 2, -math.inf, math.inf, True, tree)
+            col, minimax_score = minimax(board, 3, -math.inf, math.inf, True, tree)
             save_minimax_tree(tree, "output\\minimax_tree")
             # col = np.random.choice(get_valid_locations(board))
             if is_valid_location(board, col):
