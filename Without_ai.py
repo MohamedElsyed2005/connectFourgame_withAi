@@ -8,8 +8,8 @@ from threading import Timer
   [0,0,0,0,0,0,0],
   [0,0,0,0,0,0,0],               np.zeros((6,7))
   [0,0,0,0,0,0,0],
-  [0,0,0,0,0,0,0],
-  [0,0,0,0,0,0,0]]
+  [2,0,0,0,0,0,0],
+  [1,1,0,0,0,0,0]]
  
  
 """
@@ -44,7 +44,7 @@ def is_loc_valid(board,col):
 
 def get_open_valid_pos(board, col):
     for r in range(5, -1, -1): # 5 4 3 2 1 0 
-        if board[r][col] == 0: #  2 
+        if board[r][col] == 0: # 2 
             return r
 
 def check_win(row, col):
