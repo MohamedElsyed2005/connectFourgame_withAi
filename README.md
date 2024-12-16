@@ -70,7 +70,7 @@ The board is divided into 4-cell "windows" (horizontal, vertical, and diagonal),
 ### Instructions  
 1. Clone the repository.  
 2. Run the main Python script.  
-3. Select game mode (human vs. AI or AI vs. AI).  
+3. Select game mode (human vs. AI or human vs. human).  
 4. Enjoy the game!  
 
 ---
@@ -78,6 +78,6 @@ The board is divided into 4-cell "windows" (horizontal, vertical, and diagonal),
 # Libraries:
 - numpy => pip install numpy 
 - pygame => pip install pygame 
-- graphviz.Digraph => pip install graphviz + Download graphviz-12.2.1 (64-bit) EXE installe \n
-Link: https://graphviz.org/download/ 
+- graphviz.Digraph => pip install graphviz + Download graphviz-12.2.1 (64-bit) EXE installe
+- Link: https://graphviz.org/download/ 
 after download don't forget to add graphviz path into environment
