@@ -1,39 +1,64 @@
-# connectFourgame_withAi
-# Project Overview:  
-Connect 4 is a two-player game in which the players first choose a color and then take \n
-turns dropping their colored discs from the top into a grid. The pieces fall straight  
-down, occupying the next available space within the column. The objective of the 
-game is to connect-four of one’s own discs of the same color next to each other 
-vertically, horizontally, or diagonally. The two players keep playing until the board is 
-full. The winner is the player having greater number of connected-fours. 
+Connect 4 AI Game Project
+Overview
+Connect 4 is a two-player strategy game where players alternate turns to drop their colored discs into a vertical grid. The discs fall straight down to occupy the next available space in the chosen column.
 
-## the following 2 algorithms as options for the AI agent: 
-• Minimax without alpha-beta pruning.
-• Minimax with alpha-beta pruning.
+Objective
+The goal is to connect four of your discs of the same color in a row, either:
 
-# Heuristic Function: 
-• The heuristic function implemented in this project is defined as the 
-score_position and evaluate_window function. It evaluates the game board's 
-state to estimate the likelihood of winning for the AI agent or the player. This 
-evaluation is crucial for pruning the game tree and focusing on the most 
-promising moves. The function considers various factors to assign a score to the 
-board, helping the AI make optimal decisions. 
-• Details of the Heuristic Function 
-• The board is divided into 4-cell "windows" (horizontal, vertical, positive diagonal 
-and negative diagonal), and each window is evaluated using the 
-evaluate_window function. 
-# The evaluation assigns scores based on: 
-• 4 AI pieces in a window: Adds a high score (+100 points). 
-• 3 AI pieces + 1 empty cell: Adds a moderate score (+5 points). 
-• 2 AI pieces + 2 empty cells: Adds a small score (+2 points). 
-• 3 opponent pieces + 1 empty cell: Subtracts points to discourage letting the 
-opponent win (-15 points). 
-# Diagonal and Horizontal Advantage: 
-• The function evaluates positive and negative diagonal windows, as well as 
-horizontal windows, to account for strategic placements. 
-The score_position heuristic is designed to:  
-• Return a higher score when the AI is closer to winning. 
-• Return a lower score (or a negative one) when the opponent is closer to 
-winning. 
-• Enable efficient pruning of the game tree by limiting depth exploration based on 
-evaluated scores.
+Vertically
+Horizontally
+Diagonally
+The game ends when the board is full. The winner is determined by the player who achieves the most "connect-fours."
+
+AI Implementation
+The AI agent for this game uses Minimax algorithms with two variations:
+
+Minimax without Alpha-Beta Pruning
+Minimax with Alpha-Beta Pruning
+These algorithms allow the AI to simulate and evaluate potential moves to choose the most optimal strategy.
+
+Heuristic Function
+The AI's decision-making is powered by a heuristic function that evaluates the state of the board to estimate the likelihood of winning for either player.
+
+Key Features of the Heuristic Function
+The heuristic consists of two main components:
+
+score_position: Evaluates the entire game board.
+evaluate_window: Analyzes specific "windows" of four cells.
+Scoring Criteria
+The board is divided into 4-cell "windows" (horizontal, vertical, and diagonal), each evaluated based on the following:
+
+4 AI pieces in a window: +100 points (High priority for winning moves).
+3 AI pieces + 1 empty cell: +5 points (Good strategic placement).
+2 AI pieces + 2 empty cells: +2 points (Moderate benefit).
+3 opponent pieces + 1 empty cell: -15 points (Discourage letting the opponent win).
+Strategic Considerations
+Diagonal and Horizontal Advantage: Positive and negative diagonal windows are evaluated to account for strategic placements that lead to a win.
+The heuristic aims to:
+Maximize the score when the AI is close to winning.
+Minimize the score when the opponent is close to winning.
+Enable efficient pruning by narrowing the focus to the most promising moves.
+Algorithms
+Minimax without Alpha-Beta Pruning
+Explores the entire game tree up to a fixed depth.
+Slower due to exhaustive search but guarantees the optimal move.
+Minimax with Alpha-Beta Pruning
+Optimized version of Minimax.
+Prunes branches of the game tree that don't affect the outcome.
+Faster performance while maintaining the same optimal decisions.
+Future Enhancements
+Add additional difficulty levels.
+Improve heuristic function for more dynamic strategies.
+Implement a graphical user interface (GUI) for better user interaction.
+Instructions
+Clone the repository.
+Run the main Python script.
+Select game mode (human vs. AI or AI vs. AI).
+Enjoy the game!
+
+# Libraries:
+numpy => pip install numpy \n
+pygame => pip install pygame \n
+graphviz.Digraph => pip install graphviz + Download graphviz-12.2.1 (64-bit) EXE installe \n
+Link: https://graphviz.org/download/ \n
+after download don't forget to add graphviz path into environment
