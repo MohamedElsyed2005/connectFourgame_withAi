@@ -5,10 +5,12 @@ turns dropping their colored discs from the top into a grid. The pieces fall str
 down, occupying the next available space within the column. The objective of the 
 game is to connect-four of one’s own discs of the same color next to each other 
 vertically, horizontally, or diagonally. The two players keep playing until the board is 
-full. The winner is the player having greater number of connected-fours.  
-the following 2 algorithms as options for the AI agent: 
+full. The winner is the player having greater number of connected-fours. 
+
+## the following 2 algorithms as options for the AI agent: 
 • Minimax without alpha-beta pruning 
 • Minimax with alpha-beta pruning 
+
 # Heuristic Function: 
 • The heuristic function implemented in this project is defined as the 
 score_position and evaluate_window function. It evaluates the game board's 
