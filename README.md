@@ -8,8 +8,8 @@ vertically, horizontally, or diagonally. The two players keep playing until the 
 full. The winner is the player having greater number of connected-fours. 
 
 ## the following 2 algorithms as options for the AI agent: 
-• Minimax without alpha-beta pruning 
-• Minimax with alpha-beta pruning 
+• Minimax without alpha-beta pruning.
+• Minimax with alpha-beta pruning.
 
 # Heuristic Function: 
 • The heuristic function implemented in this project is defined as the 
